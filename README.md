@@ -1,4 +1,4 @@
-# Proyecto final para del curso "Mapeo/Objeto Relacional" en la UACM.
+# Proyecto final para del curso "Mapeo/Objeto Relacional" en la UACM San Lorenzo Tezonco.
 
 
 ## Instrucciones
