@@ -64,6 +64,7 @@ public class UsuarioDAOTest {
     public void buscarPorIdTest() throws Exception {
         Usuario u = usuarioDAO.buscarPorId(1);
         Assertions.assertNotNull(u);
+        //Assertions.assertEquals("KKLC",u.getUsuario_twitter());
     }
 
 }

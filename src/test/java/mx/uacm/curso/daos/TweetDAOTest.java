@@ -64,6 +64,7 @@ public class TweetDAOTest {
     public void buscarPorIdTest() throws Exception {
         Tweet t = tweetDAO.buscarPorId(1);
         Assertions.assertNotNull(t);
+        Assertions.assertEquals(6,t.getLikes());
     }
 
 }
