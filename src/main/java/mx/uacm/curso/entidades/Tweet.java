@@ -6,11 +6,16 @@
 package mx.uacm.curso.entidades;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -29,6 +34,53 @@ public class Tweet {
     private String contenido;
     @Column(name="likes")
     private Integer likes;
+    
+   
+    @ManyToOne
+    @JoinColumn(name="id_usuario")
+    private Usuario usuario; 
+    
+    @ManyToMany(mappedBy = "tweets")
+    private List<Hashtag> hashtags;
+    
+    @OneToOne(mappedBy = "tweet")
+    private Lugar lugar;
+    
+    @OneToOne(mappedBy = "tweet")
+    private Emocion emocion;
+
+    public Emocion getEmocion() {
+        return emocion;
+    }
+
+    public void setEmocion(Emocion emocion) {
+        this.emocion = emocion;
+    }   
+    
+    public Lugar getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(Lugar lugar) {
+        this.lugar = lugar;
+    }
+    
+    public List<Hashtag> getHashtags() {
+        return hashtags;
+    }
+
+    public void setHashtags(List<Hashtag> hashtags) {
+        this.hashtags = hashtags;
+    }
+    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }   
+      
 
     public Integer getId() {
         return id;

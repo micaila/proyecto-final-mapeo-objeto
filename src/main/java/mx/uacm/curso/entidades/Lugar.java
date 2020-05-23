@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,7 +28,31 @@ public class Lugar {
     private Double latitud;
     @Column(name="longitud")
     private Double longitud;
+    
+    @OneToOne
+    @JoinColumn(name="id_tweet")
+    private Tweet tweet;
+    
+    @ManyToOne
+    @JoinColumn(name="id_pais")
+    private Pais pais;
 
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }   
+    
+    public Tweet getTweet() {
+        return tweet;
+    }
+
+    public void setTweet(Tweet tweet) {
+        this.tweet = tweet;
+    }
+   
     public Integer getId() {
         return id;
     }

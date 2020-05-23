@@ -64,7 +64,13 @@ public class UsuarioDAOTest {
     public void buscarPorIdTest() throws Exception {
         Usuario u = usuarioDAO.buscarPorId(1);
         Assertions.assertNotNull(u);
-        //Assertions.assertEquals("KKLC",u.getUsuario_twitter());
+    }
+    
+    @Test
+    public void mapeoUsuarioTweetTest() throws Exception {
+        Usuario u = usuarioDAO.buscarPorId(1);
+        Assertions.assertNotNull(u);
+        Assertions.assertEquals(1,u.getTweets().size());
     }
 
 }

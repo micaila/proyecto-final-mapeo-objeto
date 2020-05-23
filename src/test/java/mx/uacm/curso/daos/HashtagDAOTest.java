@@ -65,5 +65,12 @@ public class HashtagDAOTest {
         Hashtag h = hashtagDAO.buscarPorId(1);
         Assertions.assertNotNull(h);
     }
+    
+     @Test
+    public void mapeoHashtagsTweetsTest() throws Exception {
+        Hashtag h = hashtagDAO.buscarPorId(2);
+        Assertions.assertNotNull(h);
+        Assertions.assertEquals(5, h.getTweets().size());
+    }
 
 }

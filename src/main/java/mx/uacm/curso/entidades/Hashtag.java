@@ -5,11 +5,16 @@
  */
 package mx.uacm.curso.entidades;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -22,7 +27,23 @@ public class Hashtag {
     @GeneratedValue(generator = "sec_has", strategy = GenerationType.SEQUENCE)
     private Integer id;
     @Column(name="nombre")
-    private String nombre;
+    private String nombre;    
+    @ManyToMany
+    @JoinTable(
+            name = "tweets_hashtags",
+            joinColumns = @JoinColumn(name = "id_hashtag"),
+            inverseJoinColumns = @JoinColumn(name = "id_tweet")
+    )
+    private List<Tweet> tweets;
+
+    public List<Tweet> getTweets() {
+        return tweets;
+    }
+
+    public void setTweets(List<Tweet> tweets) {
+        this.tweets = tweets;
+    }  
+    
 
     public Integer getId() {
         return id;

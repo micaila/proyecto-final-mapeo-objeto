@@ -65,5 +65,12 @@ public class EmocionDAOTest {
         Emocion e = emocionDAO.buscarPorId(1);
         Assertions.assertNotNull(e);
     }
+    
+    @Test
+    public void mapeoEmocionTweetTest() throws Exception {
+        Emocion e = emocionDAO.buscarPorId(1);
+        Assertions.assertNotNull(e);
+        Assertions.assertEquals(1, e.getTweet().getId());
+    }
 
 }

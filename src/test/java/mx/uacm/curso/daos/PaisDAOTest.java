@@ -65,5 +65,12 @@ public class PaisDAOTest {
         Pais p = paisDAO.buscarPorId(1);
         Assertions.assertNotNull(p);
     }
+    
+    @Test
+    public void mapeoPAisLugaresTest() throws Exception {
+        Pais p = paisDAO.buscarPorId(2);
+        Assertions.assertNotNull(p);
+        Assertions.assertEquals(12, p.getLugares().size());
+    }
 
 }

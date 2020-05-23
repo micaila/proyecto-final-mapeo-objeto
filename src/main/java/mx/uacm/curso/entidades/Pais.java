@@ -5,12 +5,14 @@
  */
 package mx.uacm.curso.entidades;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -29,7 +31,17 @@ public class Pais {
     private Double latitud;
     @Column(name="longitud")
     private Double longitud;
+    @OneToMany(mappedBy="pais")
+    private List<Lugar> lugares;
 
+    public List<Lugar> getLugares() {
+        return lugares;
+    }
+
+    public void setLugares(List<Lugar> lugares) {
+        this.lugares = lugares;
+    }   
+    
     public Integer getId() {
         return id;
     }

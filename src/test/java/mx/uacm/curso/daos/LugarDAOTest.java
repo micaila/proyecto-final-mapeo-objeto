@@ -65,5 +65,21 @@ public class LugarDAOTest {
         Lugar lugar = lugarDAO.buscarPorId(1);
         Assertions.assertNotNull(lugar);
     }
+    
+    @Test
+    public void mapeoLugarTweetTest() throws Exception {
+        Lugar l = lugarDAO.buscarPorId(1);
+        Assertions.assertNotNull(l);
+        Assertions.assertEquals(1,l.getTweet().getId());
+    }
+    
+    @Test
+    public void mapeoLugaresPaisTest() throws Exception {
+        Lugar l = lugarDAO.buscarPorId(1);
+        Assertions.assertNotNull(l);
+        Assertions.assertEquals(1,l.getPais().getId());
+    }
+    
+    
 
 }
