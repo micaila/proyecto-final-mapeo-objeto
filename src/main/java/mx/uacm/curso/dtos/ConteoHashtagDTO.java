@@ -14,6 +14,14 @@ public class ConteoHashtagDTO {
     private String nombreHashtag;
     private Long totalTweets;
 
+    public ConteoHashtagDTO() {
+    }
+
+    public ConteoHashtagDTO(String nombreHashtag, Long totalTweets) {
+        this.nombreHashtag = nombreHashtag;
+        this.totalTweets = totalTweets;
+    }  
+
     public String getNombreHashtag() {
         return nombreHashtag;
     }
