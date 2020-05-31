@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import mx.uacm.curso.daos.impl.HashtagDAOImpl;
+import mx.uacm.curso.dtos.ConteoHashtagDTO;
 import mx.uacm.curso.entidades.Hashtag;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -78,6 +79,12 @@ public class HashtagDAOTest {
     public void nombresHashashtagsTest(){    
       List<String> nombres = hashtagDAO.nombresHashtags();
       Assertions.assertEquals(48, nombres.size());
+    }
+    
+    @Test
+    public void conteoHashtagsTest(){    
+      List<ConteoHashtagDTO> t = hashtagDAO.conteoHashtags();
+      Assertions.assertEquals(48, t.size());
     }
 
 }
