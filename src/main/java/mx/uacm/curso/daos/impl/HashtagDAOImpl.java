@@ -34,7 +34,13 @@ public class HashtagDAOImpl extends GenericDAOImpl<Hashtag, Integer> implements 
 
     @Override
     public List<ConteoHashtagDTO> conteoHashtags(String patronCadena) {
-        throw new UnsupportedOperationException("Not supported yet."); //TODO change body of generated methods, choose Tools | Templates.
+        TypedQuery<ConteoHashtagDTO> consulta =
+                em.createQuery("SELECT new mx.uacm.curso.dtos.ConteoHashtagDTO(h.nombre,COUNT(t.id)) "
+                        + "FROM Hashtag h INNER JOIN h.tweets t WHERE h.nombre LIKE :patron "
+                        + "GROUP BY h.nombre",
+                        ConteoHashtagDTO.class);
+        consulta.setParameter("patron", "%"+patronCadena+"%");
+        return consulta.getResultList();
     }
     
 }

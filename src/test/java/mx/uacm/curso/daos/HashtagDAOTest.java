@@ -86,5 +86,11 @@ public class HashtagDAOTest {
       List<ConteoHashtagDTO> t = hashtagDAO.conteoHashtags();
       Assertions.assertEquals(48, t.size());
     }
+    
+    @Test
+    public void conteoHashtagsStringTest(){    
+      List<ConteoHashtagDTO> t = hashtagDAO.conteoHashtags("git");
+      Assertions.assertEquals(3, t.size());
+    }
 
 }
