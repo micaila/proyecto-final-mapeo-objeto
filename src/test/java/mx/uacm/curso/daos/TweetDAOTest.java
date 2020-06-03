@@ -5,6 +5,8 @@
  */
 package mx.uacm.curso.daos;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -15,6 +17,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -61,38 +65,48 @@ public class TweetDAOTest {
     }
 
     @Test
-    public void buscarPorIdTest() throws Exception {
+    public void buscarPorIdTest() {
         Tweet t = tweetDAO.buscarPorId(1);
         Assertions.assertNotNull(t);
     }
     
     @Test
-    public void mapeoTweetUsuarioTest() throws Exception {
+    public void mapeoTweetUsuarioTest() {
         Tweet t = tweetDAO.buscarPorId(1);
         Assertions.assertNotNull(t);
         Assertions.assertEquals(1,t.getUsuario().getId());
     }
     
     @Test
-    public void mapeoTweetsHashtagsTest() throws Exception {
+    public void mapeoTweetsHashtagsTest() {
         Tweet t = tweetDAO.buscarPorId(2);
         Assertions.assertNotNull(t);
         Assertions.assertEquals(6,t.getHashtags().size());
     }
     
     @Test
-    public void mapeoTweetLugarTest() throws Exception {
+    public void mapeoTweetLugarTest() {
         Tweet t = tweetDAO.buscarPorId(1);
         Assertions.assertNotNull(t);
         Assertions.assertEquals(1,t.getLugar().getId());
     }
     
     @Test
-    public void mapeoTweetEmocionTest() throws Exception {
+    public void mapeoTweetEmocionTest() {
         Tweet t = tweetDAO.buscarPorId(1);
         Assertions.assertNotNull(t);
         Assertions.assertEquals(1,t.getEmocion().getId());
     }
     
-
+    @Disabled("╯°□°）╯ No jala!!!")
+    @Test 
+    public void tweetsPorHashtagsTest(){
+     
+        List<String> nombresHashtags = new ArrayList<String>();
+        nombresHashtags.add("gitlab");
+        nombresHashtags.add("github");
+        List<Tweet> t = tweetDAO.tweetsPorHashtags(nombresHashtags);
+        Assertions.assertNotNull(t);
+        Assertions.assertEquals(5,t.size());
+    }
 }

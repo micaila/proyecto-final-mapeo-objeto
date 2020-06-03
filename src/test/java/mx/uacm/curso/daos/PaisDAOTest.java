@@ -5,6 +5,8 @@
  */
 package mx.uacm.curso.daos;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -61,16 +63,31 @@ public class PaisDAOTest {
     }
 
     @Test
-    public void buscarPorIdTest() throws Exception {
+    public void buscarPorIdTest(){
         Pais p = paisDAO.buscarPorId(1);
         Assertions.assertNotNull(p);
     }
     
     @Test
-    public void mapeoPAisLugaresTest() throws Exception {
+    public void mapeoPaisLugaresTest() {
         Pais p = paisDAO.buscarPorId(2);
         Assertions.assertNotNull(p);
         Assertions.assertEquals(12, p.getLugares().size());
+    }
+    
+    @Test 
+    public void obtenPorTweetsIdsTest(){       
+      
+        List<Integer> tweetsIds = new ArrayList<Integer>();
+        tweetsIds.add(1);
+        tweetsIds.add(2);
+        tweetsIds.add(3);
+        tweetsIds.add(4);
+        tweetsIds.add(7);
+        List<Pais> p = paisDAO.obtenPorTweetsIds(tweetsIds);
+        Assertions.assertNotNull(p);
+        Assertions.assertEquals(3, p.size());
+        
     }
 
 }
