@@ -6,11 +6,15 @@
 package mx.uacm.curso.daos;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import mx.uacm.curso.daos.impl.PaisDAOImpl;
 import mx.uacm.curso.daos.impl.TweetDAOImpl;
+import mx.uacm.curso.entidades.Pais;
 import mx.uacm.curso.entidades.Tweet;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -18,7 +22,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -98,7 +101,6 @@ public class TweetDAOTest {
         Assertions.assertEquals(1,t.getEmocion().getId());
     }
     
-    @Disabled("╯°□°）╯ No jala!!!")
     @Test 
     public void tweetsPorHashtagsTest(){
      
@@ -109,4 +111,35 @@ public class TweetDAOTest {
         Assertions.assertNotNull(t);
         Assertions.assertEquals(5,t.size());
     }
+    
+    @Test 
+    public void tweetsIdsPorHashtagsYFechaTest(){
+     
+        List<String> nombresHashtags = new ArrayList<String>();
+        nombresHashtags.add("gitlab");
+        nombresHashtags.add("github");
+        GregorianCalendar cal = new GregorianCalendar(2020,01,01);
+        Date fechaMin = cal.getTime();
+        cal = new GregorianCalendar(2020,02,10);
+        Date fechaMax =  cal.getTime();
+        List<Integer> t = tweetDAO.tweetsIdsPorHashtagsYFecha(nombresHashtags, fechaMin, fechaMax);
+        Assertions.assertNotNull(t);
+        Assertions.assertEquals(2,t.size());
+    }
+    
+    
+    @Test 
+    public void filtrarTweetsIdsPorPaisTest(){
+        Pais p = new PaisDAOImpl(em).buscarPorId(2);
+        List<Integer> tweetsIds = new ArrayList<Integer>();
+        tweetsIds.add(1);
+        tweetsIds.add(2);
+        tweetsIds.add(3);
+        tweetsIds.add(4);
+        tweetsIds.add(7);
+        List<Integer> t = tweetDAO.filtrarTweetsIdsPorPais(tweetsIds, p);
+        Assertions.assertEquals(3,t.size());
+    }
+    
+    
 }

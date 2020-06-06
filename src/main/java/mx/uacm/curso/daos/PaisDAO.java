@@ -9,5 +9,7 @@ import java.util.List;
 import mx.uacm.curso.entidades.Pais;
 
 public interface PaisDAO extends GenericDAO<Pais, Integer> {
+    
+    public List<Pais> obtenPorTweetsIds(List<Integer> tweetsIds);
 
 }
