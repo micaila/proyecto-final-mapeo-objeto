@@ -5,10 +5,13 @@
  */
 package mx.uacm.curso.daos;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import mx.uacm.curso.daos.impl.EmocionDAOImpl;
+import mx.uacm.curso.dtos.EmocionPredominanteDTO;
 import mx.uacm.curso.entidades.Emocion;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -61,16 +64,31 @@ public class EmocionDAOTest {
     }
 
     @Test
-    public void buscarPorIdTest() throws Exception {
+    public void buscarPorIdTest(){
         Emocion e = emocionDAO.buscarPorId(1);
         Assertions.assertNotNull(e);
     }
     
     @Test
-    public void mapeoEmocionTweetTest() throws Exception {
+    public void mapeoEmocionTweetTest(){
         Emocion e = emocionDAO.buscarPorId(1);
         Assertions.assertNotNull(e);
         Assertions.assertEquals(1, e.getTweet().getId());
     }
+    
 
+    @Test
+    public void emocionPredominantePorTweetsIdsTest(){
+        List<Integer> tweetsIds = new ArrayList<Integer>();
+        tweetsIds.add(1);
+        tweetsIds.add(2);
+        tweetsIds.add(3);
+        tweetsIds.add(4);
+        tweetsIds.add(5);
+        
+        EmocionPredominanteDTO e = emocionDAO.emocionPredominantePorTweetsIds(tweetsIds);
+        Assertions.assertNotNull(e);
+        Assertions.assertEquals("animado", e.getEmocion());
+    }
+    
 }

@@ -12,8 +12,17 @@ package mx.uacm.curso.dtos;
 public class EmocionPredominanteDTO {
     
     private String emocion;
-    private Double promedio;
+    public Double promedio;
 
+    public EmocionPredominanteDTO(String emocion, Double promedio) {
+        this.emocion = emocion;
+        this.promedio = promedio;
+    }
+
+    public EmocionPredominanteDTO() {
+    }
+    
+    
     public String getEmocion() {
         return emocion;
     }
