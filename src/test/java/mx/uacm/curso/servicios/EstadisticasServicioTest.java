@@ -5,6 +5,10 @@
  */
 package mx.uacm.curso.servicios;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -12,6 +16,7 @@ import mx.uacm.curso.daos.TweetDAO;
 import mx.uacm.curso.daos.impl.EmocionDAOImpl;
 import mx.uacm.curso.daos.impl.TweetDAOImpl;
 import mx.uacm.curso.daos.impl.UsuarioDAOImpl;
+import mx.uacm.curso.dtos.PaisYEmocionPredominanteDTO;
 import mx.uacm.curso.entidades.Usuario;
 import mx.uacm.curso.servicios.impl.EstadisticasServicioImpl;
 import org.junit.jupiter.api.AfterAll;
@@ -70,7 +75,19 @@ public class EstadisticasServicioTest {
     }
 
     @Test
-    public void test() throws Exception {
+    public void test() {
+       
+        
+        List<String> nombresHashtags = new ArrayList<String>();
+        nombresHashtags.add("gitlab");
+        nombresHashtags.add("github");
+        GregorianCalendar cal = new GregorianCalendar(2020,02,01);
+        Date fechaMin = cal.getTime();
+        cal = new GregorianCalendar(2020,03,10);
+        Date fechaMax =  cal.getTime();
+        List<PaisYEmocionPredominanteDTO> pye = estadisticasServicio.emocionesPredominantesAgrupadasPorPais(nombresHashtags, fechaMin, fechaMax);
+        Assertions.assertNotNull(pye);
+        Assertions.assertEquals(2, pye.size());
         
     }
 
