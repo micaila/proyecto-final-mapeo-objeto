@@ -16,6 +16,15 @@ public class PaisYEmocionPredominanteDTO {
     private Pais pais;
     private EmocionPredominanteDTO emocionPredominante;
 
+    public PaisYEmocionPredominanteDTO(Pais pais, EmocionPredominanteDTO emocionPredominante) {
+        this.pais = pais;
+        this.emocionPredominante = emocionPredominante;
+    }
+
+    public PaisYEmocionPredominanteDTO() {
+    }
+    
+    
     public Pais getPais() {
         return pais;
     }

@@ -14,6 +14,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import mx.uacm.curso.daos.TweetDAO;
 import mx.uacm.curso.daos.impl.EmocionDAOImpl;
+import mx.uacm.curso.daos.impl.PaisDAOImpl;
 import mx.uacm.curso.daos.impl.TweetDAOImpl;
 import mx.uacm.curso.daos.impl.UsuarioDAOImpl;
 import mx.uacm.curso.dtos.PaisYEmocionPredominanteDTO;
@@ -56,6 +57,8 @@ public class EstadisticasServicioTest {
         EstadisticasServicioImpl estadisticasServicioImpl = new EstadisticasServicioImpl();
         estadisticasServicioImpl.setEmocionDAO(new EmocionDAOImpl(em));
         estadisticasServicioImpl.setTweetDAO(new TweetDAOImpl(em));
+        estadisticasServicioImpl.setPaisDAO(new PaisDAOImpl(em));
+
         //guardamos el servicio en la variable estatica
         estadisticasServicio = estadisticasServicioImpl;
         System.out.println("inicializado");
@@ -81,9 +84,9 @@ public class EstadisticasServicioTest {
         List<String> nombresHashtags = new ArrayList<String>();
         nombresHashtags.add("gitlab");
         nombresHashtags.add("github");
-        GregorianCalendar cal = new GregorianCalendar(2020,02,01);
+        GregorianCalendar cal = new GregorianCalendar(2020,01,01);
         Date fechaMin = cal.getTime();
-        cal = new GregorianCalendar(2020,03,10);
+        cal = new GregorianCalendar(2020,02,10);
         Date fechaMax =  cal.getTime();
         List<PaisYEmocionPredominanteDTO> pye = estadisticasServicio.emocionesPredominantesAgrupadasPorPais(nombresHashtags, fechaMin, fechaMax);
         Assertions.assertNotNull(pye);

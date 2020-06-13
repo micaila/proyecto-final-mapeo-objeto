@@ -11,6 +11,7 @@ import java.util.List;
 import mx.uacm.curso.daos.EmocionDAO;
 import mx.uacm.curso.daos.PaisDAO;
 import mx.uacm.curso.daos.TweetDAO;
+import mx.uacm.curso.daos.impl.PaisDAOImpl;
 import mx.uacm.curso.dtos.PaisYEmocionPredominanteDTO;
 import mx.uacm.curso.entidades.Pais;
 import mx.uacm.curso.servicios.EstadisticasServicio;
@@ -20,6 +21,14 @@ public class EstadisticasServicioImpl implements EstadisticasServicio {
     private TweetDAO tweetDAO;
     private EmocionDAO emocionDAO;
     private PaisDAO paisDAO;
+
+    public PaisDAO getPaisDAO() {
+        return paisDAO;
+    }
+
+    public void setPaisDAO(PaisDAO paisDAO) {
+        this.paisDAO = paisDAO;
+    }
 
     public TweetDAO getTweetDAO() {
         return tweetDAO;
@@ -43,9 +52,12 @@ public class EstadisticasServicioImpl implements EstadisticasServicio {
         List<PaisYEmocionPredominanteDTO> paisesYEmociones = new ArrayList<PaisYEmocionPredominanteDTO>();        
         List<Integer> tweetsIds = tweetDAO.tweetsIdsPorHashtagsYFecha(hashtags, fechaMin, fechaMax);
         List<Pais> paises = paisDAO.obtenPorTweetsIds(tweetsIds);
-        //List<Integer> tweetsIdsPorPaises = new ArrayList<Integer>();
-    
-        //paisesYEmociones = (List<PaisYEmocionPredominanteDTO>) emocionDAO.emocionPredominantePorTweetsIds(tweetsIdsPorPaises);
+        List<Integer> tweetsIdsPorPaises = new ArrayList<Integer>();
+        for (Pais pais : paises) {
+            tweetsIdsPorPaises = tweetDAO.filtrarTweetsIdsPorPais(tweetsIds, pais);
+            PaisYEmocionPredominanteDTO paisYEmocionPredominanteDTO = new PaisYEmocionPredominanteDTO(pais, emocionDAO.emocionPredominantePorTweetsIds(tweetsIdsPorPaises));
+            paisesYEmociones.add(paisYEmocionPredominanteDTO);
+        }
         return paisesYEmociones;
     }
 
